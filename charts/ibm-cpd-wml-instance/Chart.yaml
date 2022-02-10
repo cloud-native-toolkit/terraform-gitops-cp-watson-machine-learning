@@ -1,0 +1,6 @@
+apiVersion: v2
+name: ibm-cpd-wml-instance
+description: A Helm chart to install Watson Machine Learning Custom Resource on IBM Cloud Pak for Data 
+type: application
+version: 0.1.1
+appVersion: "1.0"

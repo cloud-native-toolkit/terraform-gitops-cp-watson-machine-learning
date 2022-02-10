@@ -1,11 +1,13 @@
 name: gitops-cp-watson-machine-learning
 type: gitops
 description: >-
-  Module to populate a gitops repo with the resources to provision
-  cp-watson-machine-learning
+  Module to populate a gitops repo with the resources to provision Watson Machine Learning on Cloud Pak for Data
 tags:
   - tools
   - gitops
+  - wml
+  - watson machine learning
+  - cloud pak for data
 versions:
   - platforms:
       - kubernetes

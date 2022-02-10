@@ -1,0 +1,6 @@
+name: wkc-cr
+cpd_namespace: cpd-instance
+license: Enterprise
+scale: small
+storageVendor: Portworx
+storageClass: portworx-shared-gp3
