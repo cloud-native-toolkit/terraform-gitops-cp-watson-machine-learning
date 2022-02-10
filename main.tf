@@ -42,7 +42,7 @@ resource null_resource create_operator_yaml {
     yaml_dir = local.subscription_yaml_dir
   }
   provisioner "local-exec" {
-    command = "${path.module}/scripts/create-yaml.sh '${self.triggers.name}' '${self.triggers.chart_dir} '${self.triggers.yaml_dir}'"
+    command = "${path.module}/scripts/create-yaml.sh '${self.triggers.name}' '${self.triggers.chart_dir}' '${self.triggers.yaml_dir}'"
 
     environment = {
       VALUES_CONTENT = yamlencode(local.subscription_content)
@@ -93,7 +93,7 @@ resource null_resource create_instance_yaml {
     yaml_dir = local.instance_yaml_dir
   }
   provisioner "local-exec" {
-    command = "${path.module}/scripts/create-yaml.sh '${self.triggers.name}' '${self.triggers.chart_dir} '${self.triggers.yaml_dir}'"
+    command = "${path.module}/scripts/create-yaml.sh '${self.triggers.name}' '${self.triggers.chart_dir}' '${self.triggers.yaml_dir}'"
 
     environment = {
       VALUES_CONTENT = yamlencode(local.instance_content)
