@@ -14,7 +14,7 @@ resource null_resource write_outputs {
         namespace           = module.gitops_cp_wml.namespace
         server_name         = module.gitops_cp_wml.server_name
         layer               = module.gitops_cp_wml.layer
-        layer_dir           = module.gitops_cp_wml.layer == "infrastructure" ? "1-infrastructure" : (module.gitops_module.layer == "services" ? "2-services" : "3-applications")
+        layer_dir           = module.gitops_cp_wml.layer == "infrastructure" ? "1-infrastructure" : (module.gitops_cp_wml.layer == "services" ? "2-services" : "3-applications")
         type                = module.gitops_cp_wml.type
       })
     }
