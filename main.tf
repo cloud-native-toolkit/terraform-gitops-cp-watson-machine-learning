@@ -8,6 +8,7 @@ locals {
   instance_chart_dir = "${path.module}/charts/${local.instance_name}"
   instance_yaml_dir      = "${path.cwd}/.tmp/${local.name}/chart/${local.instance_name}"
   service_url   = "http://${local.name}.${var.namespace}"
+
   subscription_content = {
     name = "ibm-cpd-wml-subscription"
     operator_namespace = var.namespace
@@ -15,6 +16,7 @@ locals {
     channel = "v1.1"
     installPlan = "Automatic"
   }
+
   instance_content = {
     cpd_namespace = "zen"
     name = "wml-cr"
@@ -23,6 +25,7 @@ locals {
     storageVendor = "Portworx"
     storageClass = "portworx-shared-gp3"
   }
+  
   layer = "services"
   type  = "operators"
   application_branch = "main"
