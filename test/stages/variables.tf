@@ -86,7 +86,7 @@ variable "kubeseal_namespace" {
   default = "sealed-secrets"
 }
 
-variable "cp_entitlement_key" {
+variable "entitlement_key" {
 }
 
 variable "cpd_common_services_namespace" {
