@@ -8,6 +8,8 @@ tags:
   - wml
   - watson machine learning
   - cloud pak for data
+  - cpd
+  - cp4d
 versions:
   - platforms:
       - kubernetes

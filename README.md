@@ -1,7 +1,7 @@
 # Install Watson Machine Learning on Cloud Pak for Data
 
 Module to install Watson Machine Learning service on Cloud Pak for Data as per instructions mentioned below :
-https://www.ibm.com/docs/en/cloud-paks/cp-data/4.0?topic=learning-installing-watson-machine
+https://www.ibm.com/docs/en/cloud-paks/cp-data/4.0?topic=services-watson-machine-learning
 
 
 
