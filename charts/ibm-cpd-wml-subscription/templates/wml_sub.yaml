@@ -13,5 +13,5 @@ spec:
     channel: {{ .Values.channel }}
     installPlanApproval: {{ .Values.installPlan }}
     name: ibm-cpd-wml-operator
-    source: ibm-cpd-wml-operator-catalog
+    source: ibm-operator-catalog
     sourceNamespace: openshift-marketplace
