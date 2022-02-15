@@ -55,7 +55,13 @@ else
   sleep 30
 fi
 
+echo "CP4D Operators namespace : "${OPERATOR_NAMESPACE}""
+echo "CP4D namespace : "${CPD_NAMESPACE}""
+
+sleep 30
+
 CSV=$(kubectl get sub -n ${NAMESPACE} ${SUBSCRIPTION_NAME} -o jsonpath='{.status.installedCSV} {"\n"}')
+echo "Foudn CSV : "${CSV""
 SUB_STATUS=0
 while [ $SUB_STATUS !=1 ]; do
   sleep 15
@@ -63,6 +69,7 @@ while [ $SUB_STATUS !=1 ]; do
   echo "Waiting for subscription ${SUBSCRIPTION_NAME} to be ready in ${OPERATOR_NAMESPACE}"
 done
 
+echo "WML Operator is READY"
 sleep 30
 INSTANCE_STATUS=$(kubectl get WmlBase ${INSTANCE_NAME} -o jsonpath='{.status.wmlStatus} {"\n"}')
 
