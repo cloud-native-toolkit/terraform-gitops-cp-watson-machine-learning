@@ -2,9 +2,7 @@ locals {
   name          = "ibm-cpd-wml-instance"
   bin_dir       = module.setup_clis.bin_dir
   subscription_name = "ibm-cpd-wml-subscription"
-  subscription_chart_dir = "${path.module}/charts/${local.subscription_name}"
   subscription_yaml_dir      = "${path.cwd}/.tmp/${local.name}/chart/${local.subscription_name}"
-  instance_chart_dir = "${path.module}/charts/${local.name}"
   instance_yaml_dir      = "${path.cwd}/.tmp/${local.name}/chart/${local.name}"
   service_url   = "http://${local.name}.${var.namespace}"
 
@@ -98,7 +96,7 @@ resource null_resource setup_instance_gitops {
   triggers = {
     name = local.name
     namespace = var.namespace
-    yaml_dir = local.instance_chart_dir
+    yaml_dir = local.instance_yaml_dir
     server_name = var.server_name
     layer = local.layer
     type = local.type
