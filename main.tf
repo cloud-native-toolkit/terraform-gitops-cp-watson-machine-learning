@@ -1,12 +1,11 @@
 locals {
-  name          = "terraform-gitops-cp-watson-machine-learning"
+  name          = "ibm-cpd-wml-instance"
   bin_dir       = module.setup_clis.bin_dir
   subscription_name = "ibm-cpd-wml-subscription"
   subscription_chart_dir = "${path.module}/charts/${local.subscription_name}"
   subscription_yaml_dir      = "${path.cwd}/.tmp/${local.name}/chart/${local.subscription_name}"
-  instance_name = "ibm-cpd-wml-instance"
-  instance_chart_dir = "${path.module}/charts/${local.instance_name}"
-  instance_yaml_dir      = "${path.cwd}/.tmp/${local.name}/chart/${local.instance_name}"
+  instance_chart_dir = "${path.module}/charts/${local.name}"
+  instance_yaml_dir      = "${path.cwd}/.tmp/${local.name}/chart/${local.name}"
   service_url   = "http://${local.name}.${var.namespace}"
 
   subscription_content = {
@@ -27,7 +26,8 @@ locals {
   }
   
   layer = "services"
-  type  = "operators"
+  operator_type  = "operators"
+  type  = "instances"
   application_branch = "main"
   namespace = var.namespace
   layer_config = var.gitops_config[local.layer]
@@ -62,7 +62,7 @@ resource null_resource setup_operator_gitops {
     yaml_dir = local.subscription_yaml_dir
     server_name = var.server_name
     layer = local.layer
-    type = local.type
+    type = local.operator_type
     git_credentials = yamlencode(var.git_credentials)
     gitops_config   = yamlencode(var.gitops_config)
     bin_dir = local.bin_dir
@@ -91,7 +91,7 @@ resource null_resource setup_operator_gitops {
 resource null_resource create_instance_yaml {
 
   triggers = {
-    name = local.instance_name
+    name = local.name
     chart_dir = local.instance_chart_dir
     yaml_dir = local.instance_yaml_dir
   }
@@ -108,7 +108,7 @@ resource null_resource setup_instance_gitops {
   depends_on = [null_resource.create_instance_yaml]
 
   triggers = {
-    name = local.instance_name
+    name = local.name
     namespace = var.namespace
     yaml_dir = local.instance_chart_dir
     server_name = var.server_name

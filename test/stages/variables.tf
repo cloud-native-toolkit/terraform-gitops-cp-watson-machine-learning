@@ -82,7 +82,7 @@ variable "cp_entitlement_key" {
 variable "cpd_common_services_namespace" {
   type        = string
   description = "Namespace for cpd commmon services"
-  default = "ibm-common-services"
+  default = "cpd-operators"
 }
 
 variable "cpd_operator_namespace" {
