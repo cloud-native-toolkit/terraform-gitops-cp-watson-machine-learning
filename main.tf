@@ -10,7 +10,7 @@ locals {
   service_url   = "http://${local.name}.${var.namespace}"
 
   subscription_content = {
-    name = "ibm-cpd-wml-subscription"
+    name = "ibm-cpd-wml-operator-subscription"
     operator_namespace = var.operator_namespace
     syncwave = "-5"
     channel = "v1.1"
