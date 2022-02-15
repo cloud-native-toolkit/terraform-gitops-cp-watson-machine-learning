@@ -8,6 +8,6 @@ module "gitops_cp_wml" {
   kubeseal_cert = module.gitops.sealed_secrets_cert
   #operator_namespace = module.gitops_cp4d_operator.namespace
   #cpd_namespace = module.gitops_cp4d_instance.namespace
-  operator_namespace = "ibm-common-services"
+  operator_namespace = "cpd-operators"
   cpd_namespace = "gitops-cp4d-instance"
 }

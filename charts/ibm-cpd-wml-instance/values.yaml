@@ -1,5 +1,5 @@
 name: wml-cr
-cpd_namespace: cpd-instance
+cpd_namespace: gitops-cp4d-instance
 license: Enterprise
 scale: small
 storageVendor: Portworx
