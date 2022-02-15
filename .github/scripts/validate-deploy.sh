@@ -60,20 +60,20 @@ echo "CP4D namespace : "${CPD_NAMESPACE}""
 
 sleep 30
 
-CSV=$(kubectl get sub -n ${NAMESPACE} ${SUBSCRIPTION_NAME} -o jsonpath='{.status.installedCSV} {"\n"}')
-echo "Foudn CSV : "${CSV""
+CSV=$(kubectl get sub -n ${OPERATOR_NAMESPACE} ${SUBSCRIPTION_NAME} -o jsonpath='{.status.installedCSV} {"\n"}')
+echo "Found CSV : "${CSV}""
 SUB_STATUS=0
 while [ $SUB_STATUS !=1 ]; do
   sleep 15
-  SUBSTATUS=$(kubectl get deployments -n ${NAMESPACE} -l olm.owner=${CSV} -o jsonpath="{.items[0].status.availableReplicas} {'\n'}")
-  echo "Waiting for subscription ${SUBSCRIPTION_NAME} to be ready in ${OPERATOR_NAMESPACE}"
+  SUBSTATUS=$(kubectl get deployments -n "${OPERATOR_NAMESPACE}" -l olm.owner="${CSV}" -o jsonpath="{.items[0].status.availableReplicas} {'\n'}")
+  echo "Waiting for subscription "${SUBSCRIPTION_NAME}"" to be ready in "${OPERATOR_NAMESPACE}""
 done
 
 echo "WML Operator is READY"
 sleep 30
-INSTANCE_STATUS=$(kubectl get WmlBase ${INSTANCE_NAME} -o jsonpath='{.status.wmlStatus} {"\n"}')
+INSTANCE_STATUS=$(kubectl get WmlBase "${INSTANCE_NAME}" -n "${CPD_NAMESPACE}" -o jsonpath='{.status.wmlStatus} {"\n"}')
 
-echo "Watson Machine Learning WmlBase/${INSTANCE_NAME} is ${INSTANCE_STATUS}"
+echo "Watson Machine Learning WmlBase/${INSTANCE_NAME} is "${INSTANCE_STATUS}""
 
 cd ..
 rm -rf .testrepo
