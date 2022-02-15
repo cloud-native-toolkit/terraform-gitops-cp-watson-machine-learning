@@ -1,6 +1,5 @@
 module "gitops_namespace" {
   source = "github.com/cloud-native-toolkit/terraform-gitops-namespace.git"
-
   gitops_config = module.gitops.gitops_config
   git_credentials = module.gitops.git_credentials
   name = var.namespace
@@ -11,7 +10,6 @@ module "gitops_cs_namespace" {
     module.gitops_namespace
   ]
   source = "github.com/cloud-native-toolkit/terraform-gitops-namespace.git"
-
   gitops_config = module.gitops.gitops_config
   git_credentials = module.gitops.git_credentials
   name = var.cpd_common_services_namespace
@@ -23,7 +21,6 @@ module "gitops_cpd_operator_namespace" {
     module.gitops_cs_namespace
   ]
   source = "github.com/cloud-native-toolkit/terraform-gitops-namespace.git"
-
   gitops_config = module.gitops.gitops_config
   git_credentials = module.gitops.git_credentials
   name = var.cpd_operator_namespace
@@ -35,26 +32,22 @@ module "gitops_cpd_namespace" {
     module.gitops_cpd_operator_namespace
   ]
   source = "github.com/cloud-native-toolkit/terraform-gitops-namespace.git"
-
   gitops_config = module.gitops.gitops_config
   git_credentials = module.gitops.git_credentials
   name = var.cpd_namespace
-  create_operator_group = true
+  create_operator_group = false
 }
 
 resource null_resource write_namespace {
   provisioner "local-exec" {
     command = "echo -n '${module.gitops_namespace.name}' > .namespace"
   }
-
   provisioner "local-exec" {
     command = "echo -n '${module.gitops_cs_namespace.name}' > .cs_namespace"
   }
-
   provisioner "local-exec" {
     command = "echo -n '${module.gitops_cpd_operator_namespace.name}' > .operator_namespace"
   }
-
   provisioner "local-exec" {
     command = "echo -n '${module.gitops_cpd_namespace.name}' > .cpd_namespace"
   }
@@ -62,10 +55,9 @@ resource null_resource write_namespace {
 
 module cs_pull_secret {
   depends_on = [
-    module.gitops_cpd_operator_namespace
+    module.gitops_cpd_namespace
   ]
   source = "github.com/cloud-native-toolkit/terraform-gitops-pull-secret"
-
   gitops_config = module.gitops.gitops_config
   git_credentials = module.gitops.git_credentials
   server_name = module.gitops.server_name
@@ -77,12 +69,11 @@ module cs_pull_secret {
   secret_name     = "ibm-entitlement-key"
 }
 
-module cpd_operator_pull_secret {
+module cpd_op_pull_secret {
   depends_on = [
     module.cs_pull_secret
   ]
   source = "github.com/cloud-native-toolkit/terraform-gitops-pull-secret"
-
   gitops_config = module.gitops.gitops_config
   git_credentials = module.gitops.git_credentials
   server_name = module.gitops.server_name
@@ -96,10 +87,9 @@ module cpd_operator_pull_secret {
 
 module cpd_pull_secret {
   depends_on = [
-    module.cs_pull_secret
+    module.cpd_op_pull_secret
   ]
   source = "github.com/cloud-native-toolkit/terraform-gitops-pull-secret"
-
   gitops_config = module.gitops.gitops_config
   git_credentials = module.gitops.git_credentials
   server_name = module.gitops.server_name
