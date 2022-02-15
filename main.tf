@@ -11,14 +11,14 @@ locals {
 
   subscription_content = {
     name = "ibm-cpd-wml-subscription"
-    operator_namespace = var.namespace
+    operator_namespace = var.operator_namespace
     syncwave = "-5"
     channel = "v1.1"
     installPlan = "Automatic"
   }
 
   instance_content = {
-    cpd_namespace = "zen"
+    cpd_namespace = var.cpd_namespace
     name = "wml-cr"
     scale = "small"
     license = "Enterprise"

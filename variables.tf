@@ -89,11 +89,11 @@ variable "cluster_ingress_hostname" {
 variable "operator_namespace" {
   type        = string
   description = "operator namespace"
-  default     = "ibm-common-services"
+  default     = "cpd-operators"
 }
 
 variable "cpd_namespace" {
   type        = string
   description = "cpd namespace"
-  default     = "cpd-instance"
+  default     = "gitops-cp4d-instance"
 }
