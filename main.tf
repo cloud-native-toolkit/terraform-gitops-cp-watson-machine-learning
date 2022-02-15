@@ -2,9 +2,9 @@ locals {
   name          = "ibm-cpd-wml-instance"
   bin_dir       = module.setup_clis.bin_dir
   subscription_name = "ibm-cpd-wml-subscription"
-  subscription_chart_dir = "${path.module}/chart/${local.subscription_name}"
+  subscription_chart_dir = "${path.module}/charts/${local.subscription_name}"
   subscription_yaml_dir      = "${path.cwd}/.tmp/${local.name}/chart/${local.subscription_name}"
-  instance_chart_dir = "${path.module}/chart/${local.name}"
+  instance_chart_dir = "${path.module}/charts/${local.name}"
   instance_yaml_dir      = "${path.cwd}/.tmp/${local.name}/chart/${local.name}"
   service_url   = "http://${local.name}.${var.namespace}"
 
@@ -38,14 +38,8 @@ module setup_clis {
 }
 
 resource null_resource create_operator_yaml {
-
-  triggers = {
-    name = local.subscription_name
-    chart_dir = local.subscription_chart_dir
-    yaml_dir = local.subscription_yaml_dir
-  }
   provisioner "local-exec" {
-    command = "${path.module}/scripts/create-yaml.sh '${self.triggers.name}' '${self.triggers.chart_dir}' '${self.triggers.yaml_dir}'"
+    command = "${path.module}/scripts/create-yaml.sh '${local.subscription_name}' '${local.subscription_yaml_dir}'"
 
     environment = {
       VALUES_CONTENT = yamlencode(local.subscription_content)
@@ -89,14 +83,8 @@ resource null_resource setup_operator_gitops {
 }
 
 resource null_resource create_instance_yaml {
-
-  triggers = {
-    name = local.name
-    chart_dir = local.instance_chart_dir
-    yaml_dir = local.instance_yaml_dir
-  }
   provisioner "local-exec" {
-    command = "${path.module}/scripts/create-yaml.sh '${self.triggers.name}' '${self.triggers.chart_dir}' '${self.triggers.yaml_dir}'"
+    command = "${path.module}/scripts/create-yaml.sh '${local.name}' '${local.instance_yaml_dir}' "
 
     environment = {
       VALUES_CONTENT = yamlencode(local.instance_content)

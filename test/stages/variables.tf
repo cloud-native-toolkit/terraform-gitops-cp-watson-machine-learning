@@ -82,11 +82,17 @@ variable "cp_entitlement_key" {
 variable "cpd_common_services_namespace" {
   type        = string
   description = "Namespace for cpd commmon services"
-  default = "cpd-operators"
+  default = "ibm-common-services"
 }
 
 variable "cpd_operator_namespace" {
   type        = string
-  description = "Namespace for cpd commmon services"
+  description = "Namespace for cpd operators"
+  default = "cpd-operators"
+}
+
+variable "cpd_namespace" {
+  type        = string
+  description = "Namespace for cpd services"
   default = "gitops-cp4d-instance"
 }
