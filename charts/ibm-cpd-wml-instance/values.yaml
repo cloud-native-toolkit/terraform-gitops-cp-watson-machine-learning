@@ -2,5 +2,5 @@ name: wml-cr
 cpd_namespace: gitops-cp4d-instance
 license: Enterprise
 scale: small
-storageVendor: Portworx
+storageVendor: portworx
 storageClass: portworx-shared-gp3

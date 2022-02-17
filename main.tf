@@ -19,7 +19,7 @@ locals {
     name = "wml-cr"
     scale = "small"
     license = "Enterprise"
-    storageVendor = "Portworx"
+    storageVendor = "portworx"
     storageClass = "portworx-shared-gp3"
   }
   
