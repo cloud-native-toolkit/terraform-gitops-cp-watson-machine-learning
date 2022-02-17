@@ -5,12 +5,11 @@ GIT_TOKEN=$(cat git_token)
 
 export KUBECONFIG=$(cat .kubeconfig)
 NAMESPACE=$(cat .namespace)
-SUBSCRIPTION_CHART=$(jq -r '.sub_chart // "sub_chart"' gitops-output.json)
+COMPONENT_NAME=$(jq -r '.name // "my-module"' gitops-output.json)
 SUBSCRIPTION_NAME=$(jq -r '.sub_name // "sub_name"' gitops-output.json)
 INSTANCE_NAME=$(jq -r '.instance_name // "instance_name"' gitops-output.json)
 OPERATOR_NAMESPACE=$(jq -r '.operator_namespace // "operator_namespace"' gitops-output.json)
 CPD_NAMESPACE=$(jq -r '.cpd_namespace // "cpd_namespace"' gitops-output.json)
-COMPONENT_NAME=$(jq -r '.name // "my-module"' gitops-output.json)
 BRANCH=$(jq -r '.branch // "main"' gitops-output.json)
 SERVER_NAME=$(jq -r '.server_name // "default"' gitops-output.json)
 LAYER=$(jq -r '.layer_dir // "2-services"' gitops-output.json)
@@ -60,7 +59,7 @@ echo "CP4D namespace : "${CPD_NAMESPACE}""
 
 sleep 30
 
-CSV=$(kubectl get sub -n ${OPERATOR_NAMESPACE} ${SUBSCRIPTION_NAME} -o jsonpath='{.status.installedCSV} {"\n"}')
+CSV=$(kubectl get sub -n "${OPERATOR_NAMESPACE}" "${SUBSCRIPTION_NAME}" -o jsonpath='{.status.installedCSV} {"\n"}')
 echo "Found CSV : "${CSV}""
 SUB_STATUS=0
 while [ $SUB_STATUS !=1 ]; do
