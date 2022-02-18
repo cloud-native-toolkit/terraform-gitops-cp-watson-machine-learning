@@ -1,0 +1,17 @@
+apiVersion: wml.cpd.ibm.com/v1beta1
+kind: WmlBase
+metadata:
+  name: {{ .Values.name }}     # This is the recommended name, but you can change it
+  namespace: {{ .Values.cpd_namespace}}     # Replace with the project where you will install Watson Machine Learning
+  labels:
+    app.kubernetes.io/instance: {{ .Values.name }}
+    app.kubernetes.io/managed-by: ibm-cpd-wml-operator
+    app.kubernetes.io/name: ibm-cpd-wml-operator
+spec:
+  ignoreForMaintenance: false
+  scaleConfig: {{ .Values.scale }}    #This value can be set to small or medium
+  license:
+    accept: true
+    license: {{ .Values.license }}     # Specify the license you purchased
+  storageVendor: {{ .Values.storageVendor }}
+  storageClass: {{ .Values.storageClass}}
