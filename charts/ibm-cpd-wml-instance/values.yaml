@@ -4,3 +4,4 @@ license: Enterprise
 scale: small
 storageVendor: portworx
 storageClass: portworx-shared-gp3
+version: 4.0.6
