@@ -99,5 +99,4 @@ module cpd_pull_secret {
   docker_password = var.cp_entitlement_key
   docker_server   = "cp.icr.io"
   secret_name     = "ibm-entitlement-key"
-}
-*/
+}*/
