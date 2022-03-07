@@ -21,6 +21,7 @@ locals {
     license = "Enterprise"
     storageVendor = "portworx"
     storageClass = "portworx-shared-gp3"
+    version = "4.0.6"
   }
   
   layer = "services"

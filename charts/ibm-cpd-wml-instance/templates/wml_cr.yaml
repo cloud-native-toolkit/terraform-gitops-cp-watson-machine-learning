@@ -9,6 +9,7 @@ metadata:
     app.kubernetes.io/name: ibm-cpd-wml-operator
 spec:
   ignoreForMaintenance: false
+  version: {{ .Values.version }}
   scaleConfig: {{ .Values.scale }}    #This value can be set to small or medium
   license:
     accept: true
