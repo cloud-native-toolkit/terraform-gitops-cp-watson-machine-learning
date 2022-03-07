@@ -66,7 +66,6 @@ while [[ $SUB_STATUS -ne 1 ]]; do
   sleep 10
   SUB_STATUS=$(kubectl get deployments -n "${OPERATOR_NAMESPACE}" -l olm.owner="${CSV}" -o jsonpath="{.items[0].status.availableReplicas} {'\n'}")
   echo "Waiting for subscription "${SUBSCRIPTION_NAME}" to be ready in "${OPERATOR_NAMESPACE}""
-  echo "Current status of subscription is "${SUB_STATUS}""
 done
 
 echo "WML Operator is READY"
