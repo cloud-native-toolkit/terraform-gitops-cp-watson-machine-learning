@@ -62,11 +62,11 @@ sleep 30
 CSV=$(kubectl get sub -n "${OPERATOR_NAMESPACE}" "${SUBSCRIPTION_NAME}" -o jsonpath='{.status.installedCSV} {"\n"}')
 echo "Found CSV : "${CSV}""
 SUB_STATUS=0
-while [ $SUB_STATUS -ne "1" ]; do
+while [[ $SUB_STATUS -ne 1 ]]; do
   sleep 10
-  SUBSTATUS=$(kubectl get deployments -n "${OPERATOR_NAMESPACE}" -l olm.owner="${CSV}" -o jsonpath="{.items[0].status.availableReplicas} {'\n'}")
+  SUB_STATUS=$(kubectl get deployments -n "${OPERATOR_NAMESPACE}" -l olm.owner="${CSV}" -o jsonpath="{.items[0].status.availableReplicas} {'\n'}")
   echo "Waiting for subscription "${SUBSCRIPTION_NAME}" to be ready in "${OPERATOR_NAMESPACE}""
-  echo "Current status of subscription is "${SUBSTATUS}""
+  echo "Current status of subscription is "${SUB_STATUS}""
 done
 
 echo "WML Operator is READY"
