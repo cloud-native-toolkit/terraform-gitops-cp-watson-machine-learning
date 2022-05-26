@@ -67,6 +67,7 @@ while [ -z "${CSV}"]; do
   if [[ $count -eq 120 ]]; then
     echo "Timed out waiting for CSV"
     exit 1
+  fi
 done
 
 SUB_STATUS=0
