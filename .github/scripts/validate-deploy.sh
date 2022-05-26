@@ -85,7 +85,16 @@ done
 
 echo "WML Operator is READY"
 sleep 60
-INSTANCE_STATUS=$(kubectl get WmlBase "${INSTANCE_NAME}" -n "${CPD_NAMESPACE}" -o jsonpath='{.status.wmlStatus} {"\n"}')
+
+INSTANCE_STATUS=""
+while [ true ]; do
+  INSTANCE_STATUS=$(kubectl get WmlBase "${INSTANCE_NAME}" -n "${CPD_NAMESPACE}" -o jsonpath='{.status.wmlStatus} {"\n"}')
+  echo "Waiting for instance "${INSTANCE_NAME}" to be ready. Current status : "${INSTANCE_STATUS}""
+  if [ $INSTANCE_STATUS == "Completed" ]; then
+    break
+  fi
+  sleep 30
+done
 
 echo "Watson Machine Learning WmlBase/"${INSTANCE_NAME}" is "${INSTANCE_STATUS}""
 
