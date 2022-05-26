@@ -57,10 +57,25 @@ fi
 echo "CP4D Operators namespace : "${OPERATOR_NAMESPACE}""
 echo "CP4D namespace : "${CPD_NAMESPACE}""
 
-sleep 30
+CSV=""
+count=0
+csvstr="ibm-cpd-wml-operator."
+while [ true ]; do
+  sleep 60
+  CSV=$(kubectl get sub -n "${OPERATOR_NAMESPACE}" "${SUBSCRIPTION_NAME}" -o jsonpath='{.status.installedCSV} {"\n"}')
+  echo "Found CSV : "${CSV}""
+  count=$((count + 1))
+  if [[ $CSV == *"$csvstr"* ]];
+  then
+      echo "Found CSV : "${CSV}""
+      break
+  fi
+  if [[ $count -eq 120 ]]; then
+    echo "Timed out waiting for CSV"
+    exit 1
+  fi
+done
 
-CSV=$(kubectl get sub -n "${OPERATOR_NAMESPACE}" "${SUBSCRIPTION_NAME}" -o jsonpath='{.status.installedCSV} {"\n"}')
-echo "Found CSV : "${CSV}""
 SUB_STATUS=0
 while [[ $SUB_STATUS -ne 1 ]]; do
   sleep 10
@@ -70,7 +85,16 @@ done
 
 echo "WML Operator is READY"
 sleep 60
-INSTANCE_STATUS=$(kubectl get WmlBase "${INSTANCE_NAME}" -n "${CPD_NAMESPACE}" -o jsonpath='{.status.wmlStatus} {"\n"}')
+
+INSTANCE_STATUS=""
+while [ true ]; do
+  INSTANCE_STATUS=$(kubectl get WmlBase "${INSTANCE_NAME}" -n "${CPD_NAMESPACE}" -o jsonpath='{.status.wmlStatus} {"\n"}')
+  echo "Waiting for instance "${INSTANCE_NAME}" to be ready. Current status : "${INSTANCE_STATUS}""
+  if [ $INSTANCE_STATUS == "Completed" ]; then
+    break
+  fi
+  sleep 30
+done
 
 echo "Watson Machine Learning WmlBase/"${INSTANCE_NAME}" is "${INSTANCE_STATUS}""
 
