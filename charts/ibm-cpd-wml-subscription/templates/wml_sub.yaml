@@ -8,7 +8,7 @@ metadata:
   name: {{ .Values.name }}
   namespace: {{ .Values.operator_namespace}}    # Pick the project that contains the Cloud Pak for Data operator
   annotations:
-    argocd.argoproj.io/sync-wave: {{ .Values.syncwave | default "-5" | quote }}
+    argocd.argoproj.io/sync-wave: {{ .Values.syncwave | default "-3" | quote }}
 spec:
     channel: {{ .Values.channel }}
     installPlanApproval: {{ .Values.installPlan }}

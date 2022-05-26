@@ -9,7 +9,7 @@ locals {
   subscription_content = {
     name = "ibm-cpd-wml-operator-subscription"
     operator_namespace = var.operator_namespace
-    syncwave = "-5"
+    syncwave = "-3"
     channel = var.operator_channel
     installPlan = var.install_plan
   }
