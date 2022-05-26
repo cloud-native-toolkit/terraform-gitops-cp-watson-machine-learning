@@ -10,18 +10,18 @@ locals {
     name = "ibm-cpd-wml-operator-subscription"
     operator_namespace = var.operator_namespace
     syncwave = "-5"
-    channel = "v1.1"
-    installPlan = "Automatic"
+    channel = var.operator_channel
+    installPlan = var.install_plan
   }
 
   instance_content = {
     cpd_namespace = var.cpd_namespace
     name = "wml-cr"
-    scale = "small"
-    license = "Enterprise"
-    storageVendor = "portworx"
-    storageClass = "portworx-shared-gp3"
-    version = "4.0.6"
+    scale = var.install_scale
+    license = var.license
+    storageVendor = var.storage_vendor
+    storageClass = var.storage_class
+    version = var.instance_version
   }
   
   layer = "services"
@@ -82,6 +82,7 @@ resource null_resource setup_operator_gitops {
 }
 
 resource null_resource create_instance_yaml {
+  depends_on = [null_resource.setup_operator_gitops]
   provisioner "local-exec" {
     command = "${path.module}/scripts/create-yaml.sh '${local.name}' '${local.instance_yaml_dir}' "
 

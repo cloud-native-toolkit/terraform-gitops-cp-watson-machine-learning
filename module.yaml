@@ -1,4 +1,4 @@
-name: gitops-cp-watson-machine-learning
+name: gitops-cp-wml
 type: gitops
 description: >-
   Module to populate a gitops repo with the resources to provision Watson Machine Learning on Cloud Pak for Data

@@ -39,7 +39,7 @@ This module makes use of the output from other modules:
 
 ```hcl-terraform
 module "gitops_cp_wml" {
-  source = "https://github.com/cloud-native-toolkit/terraform-gitops-cp-watson-machine-learning.git"
+  source = "https://github.com/cloud-native-toolkit/terraform-gitops-cp-wml.git"
 
   gitops_config = module.gitops.gitops_config
   git_credentials = module.gitops.git_credentials
