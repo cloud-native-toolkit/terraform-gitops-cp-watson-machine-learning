@@ -1,6 +1,10 @@
 module "gitops_cp_wml" {
   source = "./module"
 
+  depends_on = [
+    module.cp-watson-studio
+  ]
+
   gitops_config = module.gitops.gitops_config
   git_credentials = module.gitops.git_credentials
   server_name = module.gitops.server_name
