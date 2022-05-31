@@ -9,7 +9,7 @@ locals {
   subscription_content = {
     name = "ibm-cpd-wml-operator-subscription"
     operator_namespace = var.operator_namespace
-    syncwave = "-3"
+    syncwave = sub_syncwave
     channel = var.operator_channel
     installPlan = var.install_plan
   }
@@ -17,6 +17,7 @@ locals {
   instance_content = {
     cpd_namespace = var.cpd_namespace
     name = "wml-cr"
+    syncwave = inst_syncwave
     scale = var.install_scale
     license = var.license
     storageVendor = var.storage_vendor

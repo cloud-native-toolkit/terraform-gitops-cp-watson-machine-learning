@@ -1,5 +1,5 @@
 name: ibm-cpd-wml-operator-subscription
 operator_namespace: cpd-operators
-syncWave: "-5"
+syncWave: "-2"
 channel: v1.1
 installPlan: Automatic

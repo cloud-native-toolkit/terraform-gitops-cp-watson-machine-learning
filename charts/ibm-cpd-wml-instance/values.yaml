@@ -1,5 +1,6 @@
 name: wml-cr
 cpd_namespace: gitops-cp4d-instance
+syncWave: "-1"
 license: Enterprise
 scale: small
 storageVendor: portworx

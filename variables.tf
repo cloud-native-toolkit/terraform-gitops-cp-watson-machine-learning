@@ -139,3 +139,15 @@ variable "install_scale" {
   description = "install scale"
   default     = "small"
 }
+
+variable "sub_syncwave" {
+  type        = string
+  description = "Sync Wave"
+  default     = "-2"
+}
+
+variable "inst_syncwave" {
+  type        = string
+  description = "Sync Wave"
+  default     = "-1"
+}
